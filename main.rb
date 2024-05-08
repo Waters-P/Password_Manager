@@ -1,25 +1,62 @@
 
+require_relative "new_admin_info_2"
+
+
 
 
 class Password_Manager
-  attr_reader :account_id #5digits
-  attr_accessor :admin_info
-  attr_reader :display_account_info
+  
+
+  def initialize
+    @admin_accounts = []
+  end
+  
+
+  def add_admin
+    print "Type your 1st name: "
+    fst_name = gets.chomp
+    print "Type your surname: "
+    lst_name = gets.chomp
+    print "Type your email: "
+    email = gets.chomp
+    print "Create a username: "
+    username = gets.chomp
+    print "Create a password. It will be encrypted for maximum account protection"
+    pass_word = gets.chomp
+
+    
+    #@admin_accounts << Admin_info.new(fst_name, lst_name, email, username, pass_word) 
+
+    user = Admin_info.new(fst_name, lst_name, email, username, pass_word) 
+
+    @admin_accounts.push(user.fst_name)
+
+    #puts " New Administrator saved! "
+
+    
+  end
 
 
-  def initialize 
-    @account_id = rand(99999)
-
-  end  
+  
 
 
 
+  def show_admins
+    puts "Admins Saved:"
+    @admin_accounts.each do |admin|
+      puts "#{admin}"
+    end
+  end
 
 
 
-end 
+
+end  
 
 
-new_user = Password_Manager.new
+manager = Password_Manager.new
 
-pp new_user.account_id
+manager.add_admin
+
+
+manager.show_admins
