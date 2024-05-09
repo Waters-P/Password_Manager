@@ -9,35 +9,21 @@ class Password
     
   end
 
-  
+end
 
+=begin
+  def add_pw
 
-  def encrpt_pw
+    print  "Create a password. It will be encrypted for maximum account protection: "
+    pass_to_be_encrpt = gets.chomp
 
-    box_of_chars = [" ", "`","~","!","@","#","&","%","^","&","*","(",")","-","_","=","+","[","{","]","}","'\'","|",";",":","'",'"',",","<",".",">","/","?","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+    new_pw = Password.new(pass_to_be_encrpt)
 
-
-    cipher = [" ", "`","~","!","@","#","&","%","^","&","*","(",")","-","_","=","+","[","{","]","}","'\'","|",";",":","'",'"',",","<",".",">","/","?","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-
-    cipher.shuffle!
-
-    # encrypting
-
-    plain_text = @admin_pw_storage.fetch(:pw)
-    pop = plain_text.split("")
-
-    cipher_text = ""
-
-    a = 0 
-    while (a < pop.length)
-      dx = box_of_chars.index(pop[a])
-      cipher_text += cipher[dx]
-      a += 1
-    end
-
-    pp plain_text
-    puts cipher_text
+    @admin_pw_storage.store(:pass_to_be_encrpt, new_pw.pass_to_be_encrpt) 
 
   end
+=end  
 
-end
+
+
+

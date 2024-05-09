@@ -23,17 +23,4 @@ end
 
 
 
-=begin
 
-
-user = Admin_info.new(fst_name, lst_name, email, username)
-
-account_id = user.account_id.to_s
-
-
-
-
-
-puts " #{fst_name} , to maximize your protection, save your account number in a discrete place: #{account_id}"
-
-=end
