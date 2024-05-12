@@ -1,16 +1,16 @@
 class Admin_info
 
   attr_reader :account_id 
-  attr_reader :fst_name
-  attr_reader :lst_name
+  attr_reader :first_name
+  attr_reader :last_name
   attr_accessor :email
   attr_accessor :username
   
 
-  def initialize (fst_name, email) # lst_name, email, username
+  def initialize (first_name, email) # last_name, email, username
     @account_id = rand(99999)
-    @fst_name = fst_name
-    @lst_name = lst_name
+    @first_name = first_name
+    @last_name = last_name
     @email = email
     @username = username
     

@@ -104,18 +104,17 @@ class Password_vault
   def display_pw_in_vault
 
     print " this is the process: \n \n"
-    @encrpt_pw_vault.each_key {|value| puts value}
 
-    @encrpt_pw_vault.each_value {|value| puts value}
+    @encrpt_pw_vault.each_key {|key| puts "#{key}: #{@encrpt_pw_vault[key]} "}
+ 
 
     #Decrpt
-    @decrpt_pw_vault.each_key {|value| puts value}
 
-    @decrpt_pw_vault.each_value {|value| puts value}
-
+    @decrpt_pw_vault.each_key {|key| puts"#{key}: #{@decrpt_pw_vault[key]} "}
+   
   end
 
-  
+
   def delete_pw_in_vault
 
     while (true)
@@ -127,11 +126,13 @@ class Password_vault
 
       if @encrpt_pw_vault.has_key?(v_n)
 
+      @pw_vault.delete(v_n)
       @encrpt_pw_vault.delete(v_n)
+      @decrpt_pw_vault.delete(v_n)
      
       end
 
-      print "continue? 'y' for yes, 'n' for no: \n \n"
+      print "delete more passwords? 'y' for yes, 'n' for no: \n \n"
 
       if gets.chomp == "n"
         print "Your Password security is maximized. \n \n"
@@ -143,6 +144,18 @@ class Password_vault
     end
 
   end
+
+
+  def vault_balance
+
+    print "#{@pw_vault.length} \n"
+    print "#{@encrpt_pw_vault.length} \n"
+    print "#{@decrpt_pw_vault.length} \n"
+
+
+
+  end 
+
 
 end
 
@@ -160,3 +173,5 @@ user.display_pw_in_vault
 user.delete_pw_in_vault
 
 user.display_pw_in_vault
+
+user.vault_balance
