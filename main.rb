@@ -1,7 +1,7 @@
 
 require_relative "new_admin_info_2"
 
-require_relative "password"
+require_relative "admin_password"
 
 
 
@@ -11,7 +11,9 @@ class Password_Manager
   def initialize
     @admin_info_storage = {}
 
-    @admin_pw_storage = {}
+    @admin_main_pw_storage = {}
+
+    @id_vault = {}
   end
   
 
@@ -33,14 +35,14 @@ class Password_Manager
 
     @admin_info_storage.store(:fst_name, user.fst_name)
     #@admin_info_storage.store(:pass_word, user.pass_word)
-    @admin_info_storage.store(:account_id, user.account_id.to_s)
+    @id_vault.store(:account_id, user.account_id.to_s)
 
     print  "Create a password. It will be encrypted for maximum account protection: "
-    pass_to_be_encrpt = gets.chomp
+    main_pw_to_be_encrpt = gets.chomp
 
-    new_pw = Password.new(pass_to_be_encrpt)
+    new_pw = Admin_main_Password.new(main_pw_to_be_encrpt)
 
-    @admin_pw_storage.store(:pass_to_be_encrpt, new_pw.pass_to_be_encrpt) 
+    @admin_main_pw_storage.store(:main_pw_to_be_encrpt, new_pw.main_pw_to_be_encrpt) 
    
    
 
@@ -49,8 +51,9 @@ class Password_Manager
     
 
 
-    puts "New Administrator saved! Your user_id is: " + @admin_info_storage.fetch(:account_id)
+    puts "New Administrator saved! Your user_id is: " + @id_vault.fetch(:account_id)
 
+    print  account_id
     
   end
 
@@ -58,14 +61,17 @@ class Password_Manager
   def show_admins
     print "Here, you will enter your first name then user_id to lookup your account info. \n"
     print "enter first name: \n"
-    name = gets.chomp
-      if @admin_info_storage.has_value?(name)
+    fst_name = gets.chomp
+      if @admin_info_storage.has_value?(fst_name)
         puts "enter your user_id: "
         id = gets.chomp
-        if @admin_info_storage.has_value?(id)
+        if @id_vault.has_value?(id)
 
           puts "yes, you are in db"
           # show admin info
+        else 
+          print "wrong id :( \n"
+          
         end
       end
   end
@@ -82,7 +88,7 @@ class Password_Manager
 
     # encrypting
 
-    plain_text = @admin_pw_storage.fetch(:pass_to_be_encrpt)
+    plain_text = @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
     grandma = plain_text.split("")
 
     cipher_text = ""
@@ -110,6 +116,7 @@ while (true)
 
   manager.add_admin
   
+  #print "account id: " + @admin_info_storage.fetch(:account_id) + "\n"
   
   manager.show_admins
   
@@ -117,11 +124,12 @@ while (true)
   
   manager.encrpt_pw
 
-  print "keep running?: \n \n"
+  print "continue?: \n \n"
 
   if gets.chomp == "stop"
+    print "Your Password security is maximized. \n \n"
     break
   else
-    print "ok: keep running program \n \n"
+    print "ok: starting app engine \n \n"
   end
 end
