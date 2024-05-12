@@ -14,9 +14,6 @@ class Admin_info
     @email = email
     @username = username
     
-    
-
   end  
   
-
 end  

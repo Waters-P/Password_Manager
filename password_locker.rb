@@ -30,20 +30,20 @@ class Password_vault
       a = 1
 
       while (true)
-        print "Enter a password into the encyption vault: \n "
+        print "Enter password into the encyption vault: \n "
         print "Your 1st password will be in 'vault 1', 2nd will be in 'vault 2' and so on: Remember your 'vault numbers'! "
         
         needs_encryption = gets.chomp
         #new_pw = Password_vault.new
         @pw_vault.store(a, needs_encryption) 
 
-        print "type 'stop' to exit or press 'y' to add more \n"
+        print "type 'stop' to exit or press 'press any button' to add more \n"
 
         if gets.chomp == "stop"
           print "Your Password is encrypted and security is maximized. \n \n"
           break
         else
-          print "ok: Add another password into the encryption vault:  \n \n"
+          print "ok: create another password for the encryption vault  \n \n"
         end
 
         a+=1
@@ -119,29 +119,52 @@ class Password_vault
 
     #Decrpt
 
-    @decrpt_pw_vault.each_key {|key| puts"#{key}: #{@decrpt_pw_vault[key]} "}
+    @decrpt_pw_vault.each_key {|key| puts "#{key}: #{@decrpt_pw_vault[key]} "}
    
   end
 
 
   def delete_pw_in_vault
-
+    v_n = 0
     while (true)
 
-      print "delete a password using its 'vault number': "
+      v_n_state = false
+      while (v_n_state == false)
+        print "delete a password using its 'vault number': "
+        v_n = gets.chomp
+        v_n = v_n.to_f
 
-      v_n = gets.chomp
-      v_n = v_n.to_i
+        pp v_n.class
 
+        if v_n.class == Float
+          v_n = v_n.to_s
+          
+          if v_n.include? "." 
+            puts "must be a whole number"
+            break
+          end          
+          
+          break
+
+        else
+          v_n = v_n.to_i
+          v_n_state = true
+        end
+      end
+      
       if @encrpt_pw_vault.has_key?(v_n)
 
-      @pw_vault.delete(v_n)
-      @encrpt_pw_vault.delete(v_n)
-      @decrpt_pw_vault.delete(v_n)
-     
+        v_n_state = true
+        puts "deleting vault: #{v_n}"
+        @pw_vault.delete(v_n)
+        @encrpt_pw_vault.delete(v_n)
+        @decrpt_pw_vault.delete(v_n)
+        
+      else
+        puts "key: #{v_n}, not in vault"
       end
 
-      print "delete more passwords? 'y' for yes, 'n' for no: \n \n"
+      print "delete passwords? 'press any button' for yes,\n'n' for no: \n \n"
 
       if gets.chomp == "n"
         print "Your Password security is maximized. \n \n"
@@ -154,21 +177,16 @@ class Password_vault
 
   end
 
-
   def vault_balance
 
-    print "#{@pw_vault.length} \n"
-    print "#{@encrpt_pw_vault.length} \n"
-    print "#{@decrpt_pw_vault.length} \n"
-
-
+    print "pw vault balance: #{@pw_vault.length} \n"
+    print "encrpt_pw_vault_balance: #{@encrpt_pw_vault.length} \n"
+    print "decrpt_pw_vault_balance: #{@decrpt_pw_vault.length} \n"
 
   end 
 
 
 end
-
-
 
 
 user = Password_vault.new
