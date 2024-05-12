@@ -21,7 +21,7 @@ class Password_vault
   def add_to_vault
 
     puts "Keep in mind you will not be able to edit any password stored in a vault :( \n"
-    print " to add password, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
+    print "\nTo add password, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)
       print "try again. to add password, find the mystery word, in the mystery answer, to the question: 'why do people drink water?' \n"
@@ -31,8 +31,9 @@ class Password_vault
       a = 1
 
       while (true)
-        print "Enter password into the encyption Vault: \n "
-        print "Your 1st password will be in 'Vault 1', 2nd will be in 'Vault 2' and so on: Remember your 'Vault numbers'! "
+
+        print "Your 1st password will be in 'Vault 1', 2nd will be in 'Vault 2' and so on.\nRemember your 'Vault numbers'!\n"
+        print "Enter password into the encyption Vault: \n"
         
         needs_encryption = gets.chomp
         #new_pw = Password_vault.new
@@ -41,7 +42,7 @@ class Password_vault
         print "type 'stop' to exit or press 'press any button' to add more \n"
 
         if gets.chomp == "stop"
-          print "Your Password is encrypted and security is maximized. \n \n"
+          print "Your Password security is being maximized. \n \n"
           break
         else
           print "ok: create another password for the encryption vault  \n \n"
@@ -66,6 +67,8 @@ class Password_vault
 
     # encrypting
 
+    puts "Encryting in progress (14%)..."
+
     b = 1
     c = 1
     d = 1
@@ -80,7 +83,7 @@ class Password_vault
       a = 0 
       while (a < grandma.length)
         dx = box_of_chars.index(grandma[a])
-        cipher_text += cipher[dx]
+        cipher_text += cipher[dx.to_i]
         a += 1
       end
 
@@ -108,13 +111,15 @@ class Password_vault
       d += 1
     end
 
+    puts "Encrypting (100%) ^_^ \n"
+
   end
 
 
   def display_pw_in_vault
 
 
-    puts "Keep in mind you will not be able to edit any password stored in a vault :( \n\n"
+    puts "\nKeep in mind you will not be able to edit any password stored in a vault :( \n\n"
     print "to view inside Vault, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)
