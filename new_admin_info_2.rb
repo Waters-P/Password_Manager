@@ -7,7 +7,7 @@ class Admin_info
   attr_accessor :username
   
 
-  def initialize (fst_name) # lst_name, email, username
+  def initialize (fst_name, email) # lst_name, email, username
     @account_id = rand(99999)
     @fst_name = fst_name
     @lst_name = lst_name

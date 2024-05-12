@@ -9,6 +9,8 @@ class Password_vault
     @pw_vault = {}
 
     @encrpt_pw_vault = {}
+
+    @decrpt_pw_vault = {}
     
    # @needs_encryption = needs_encryption
 
@@ -56,6 +58,7 @@ class Password_vault
 
     b = 1
     c = 1
+    d = 1
 
     while (b < (@pw_vault.length) + 1)
 
@@ -73,8 +76,26 @@ class Password_vault
 
       @encrpt_pw_vault.store(c, cipher_text)
 
+      #Decrypt
+
+      cipher_text = @encrpt_pw_vault.fetch(d)
+      grandma = cipher_text.split("")
+
+      plain_text = ""
+
+      a = 0 
+      while (a < grandma.length)
+        dx = cipher.index(grandma[a])
+        plain_text += box_of_chars[dx]
+        a += 1
+      end
+
+      @decrpt_pw_vault.store(d, plain_text)
+
+
       b += 1
       c += 1
+      d += 1
     end
 
   end
@@ -83,25 +104,43 @@ class Password_vault
   def display_pw_in_vault
 
     print " this is the process: \n \n"
-    @pw_vault.each_key {|value| puts value.class}
+    @encrpt_pw_vault.each_key {|value| puts value}
 
     @encrpt_pw_vault.each_value {|value| puts value}
+
+    #Decrpt
+    @decrpt_pw_vault.each_key {|value| puts value}
+
+    @decrpt_pw_vault.each_value {|value| puts value}
 
   end
 
+  
   def delete_pw_in_vault
 
-    print "delete a password using its 'vault number': "
+    while (true)
 
-    #v_n = gets.chomp
+      print "delete a password using its 'vault number': "
 
-    #if v_n = @encrpt_pw_vault.key
+      v_n = gets.chomp
+      v_n = v_n.to_i
 
-    @pw_vault.each_key {|value| puts value}
+      if @encrpt_pw_vault.has_key?(v_n)
 
-    @encrpt_pw_vault.each_value {|value| puts value}
-    
+      @encrpt_pw_vault.delete(v_n)
+     
+      end
 
+      print "continue? 'y' for yes, 'n' for no: \n \n"
+
+      if gets.chomp == "n"
+        print "Your Password security is maximized. \n \n"
+        break
+      else
+        print "ok: delete more \n \n"
+      end
+      
+    end
 
   end
 
@@ -115,5 +154,9 @@ user = Password_vault.new
 user.add_to_vault
 
 user.encrpt_pw
+
+user.display_pw_in_vault
+
+user.delete_pw_in_vault
 
 user.display_pw_in_vault
