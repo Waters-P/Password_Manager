@@ -20,6 +20,7 @@ class Password_vault
 
   def add_to_vault
 
+    puts "Keep in mind you will not be able to edit any password stored in a vault :( \n"
     print " to add password, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)
@@ -112,10 +113,18 @@ class Password_vault
 
   def display_pw_in_vault
 
-    print " this is the process: \n \n"
 
+    puts "Keep in mind you will not be able to edit any password stored in a vault :( \n\n"
+    print "to view inside Vault, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
+    mystery_word = "eat"
+    while (gets.chomp != mystery_word)
+      print "try again. to view inside Vault, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
+    end
+
+    print "'eat' is the answer \n"
+
+    print "\nViewing inside Vault: \n \n"
     @encrpt_pw_vault.each_key {|key| puts "#{key}: #{@encrpt_pw_vault[key]} "}
- 
 
     #Decrpt
 
