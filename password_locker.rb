@@ -20,28 +20,37 @@ class Password_vault
 
   def add_to_vault
 
-    a = 1
-
-    while (true)
-      print "Enter a password into the encyption vault: \n "
-      print "Your 1st password will be in 'vault 1', 2nd will be in 'vault 2' and so on: Remember your 'vault numbers'! "
-      
-      needs_encryption = gets.chomp
-      #new_pw = Password_vault.new
-      @pw_vault.store(a, needs_encryption) 
-
-      print "type 'stop' to exit or press 'y' to add more \n"
-
-      if gets.chomp == "stop"
-        print "Your Password is encrypted and security is maximized. \n \n"
-        break
-      else
-        print "ok: Add another password into the encryption vault:  \n \n"
-      end
-
-      a+=1
-
+    print " to add password, find the mystery word, in the mystery answer to the question: 'why do people 'drink' water?' \n"
+    mystery_word = "eat"
+    while (gets.chomp != mystery_word)
+      print "try again. to add password, find the mystery word in the mystery answer to the question: 'why do people drink water?' \n"
     end
+    print "'eat' is the answer \n"
+    
+      a = 1
+
+      while (true)
+        print "Enter a password into the encyption vault: \n "
+        print "Your 1st password will be in 'vault 1', 2nd will be in 'vault 2' and so on: Remember your 'vault numbers'! "
+        
+        needs_encryption = gets.chomp
+        #new_pw = Password_vault.new
+        @pw_vault.store(a, needs_encryption) 
+
+        print "type 'stop' to exit or press 'y' to add more \n"
+
+        if gets.chomp == "stop"
+          print "Your Password is encrypted and security is maximized. \n \n"
+          break
+        else
+          print "ok: Add another password into the encryption vault:  \n \n"
+        end
+
+        a+=1
+
+      end
+    
+  
   end
 
 

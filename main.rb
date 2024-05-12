@@ -52,32 +52,85 @@ class Password_Manager
 
 
   def show_admins
-    print "Here, you can enter your first name & user_id to lookup your account info. \n"
+    enter_pw_turns_3 = 3
+    enter_id_turns_3 = 3
+    enter_name_turns_3 = 3
+    while (enter_name_turns_3 >= 1)
+      
+    print "Now, you can enter your first name & user_id to lookup your account info. \n"
+    print "For each category you have #{enter_name_turns_3} attempts remaining. \n"
     print "enter first name: \n"
     first_name = gets.chomp
 
       if @admin_info_storage.has_value?(first_name)
+        
+        while (enter_id_turns_3 >= 1)
         puts "enter your user_id: "
         id = gets.chomp
 
-        if @id_vault.has_value?(id)
-          print "What is your password? "
-          pw = gets.chomp
+          if @id_vault.has_value?(id)
 
-          if pw == @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
+            while (enter_pw_turns_3 >= 1)
+            print "What is your password? \n"
+            pw = gets.chomp
 
-            puts "yes, you are in db\n"
+              if pw == @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
 
-            @admin_info_storage.each_key {|key| print "#{key}: #{@admin_info_storage[key]} "}
+                puts "yes, you are in db\n"
+
+                @admin_info_storage.each_key {|key| print "#{key}: #{@admin_info_storage[key]} "}
+                
+              else 
+                print "wrong password -x? : '#{pw}' not in db. \n"
+                if enter_pw_turns_3 > 1
+                  puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
+                else 
+                  puts "Too many incorrect passwords"
+                end
+              end    
+              enter_pw_turns_3 -= 1
+              if enter_pw_turns_3 < 1
+                puts "Contact Support."
+                raise "#{enter_pw_turns_3} attempts remaining"
+              end
             
-          else
-            print "error! \n"
+            end
+
+          else 
+            print "wrong id :( : '#{id}' not in db. \n"
+            if enter_id_turns_3 > 1
+              puts "Try again #{enter_id_turns_3 - 1} attempts remaining"
+            else 
+              puts "Too many incorrect id numbers"
+            end
           end
 
-        else 
-          print "wrong id :( \n"
+          enter_id_turns_3 -= 1
+          if enter_id_turns_3 < 1
+            puts "Contact Support."
+            raise "#{enter_id_turns_3} attempts remaining"
+          end
+
         end
+
+      else
+        print "#{first_name} not in db. Check Spelling \n \n"
+        
+            if enter_name_turns_3 > 1
+              puts "Try again #{enter_name_turns_3 - 1} attempts remaining"
+            else 
+              puts "Too many incorrect name spelling"
+            end
       end
+    
+    enter_name_turns_3 -= 1  
+
+    if enter_name_turns_3 < 0
+      puts "Contact Support."
+      raise "#{enter_name_turns_3} attempts remaining"
+    end
+
+    end
   end
 
 
@@ -158,9 +211,13 @@ while (true)
 
   manager.add_admin
 
+  manager.show_admins
+
   manager.change_email
 
   manager.change_password
+
+  manager.show_admins
 
 
 
