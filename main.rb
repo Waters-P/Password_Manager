@@ -85,7 +85,7 @@ class Password_Manager
     enter_id_turns_3 = 3
     enter_name_turns_3 = 3
     print "Now, you can enter your first name & user_id to lookup your account info. \n"
-    print "For each category you have #{enter_name_turns_3} attempts remaining. \n"
+    print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
 
     name_state = false
     while (name_state == false)
@@ -108,10 +108,10 @@ class Password_Manager
             
               if pw == @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
 
-                puts "yes, you are in db\n"
+                puts "yes, you are in db\n\n"
 
-                @admin_info_storage.each_key {|key| print "#{key}: #{@admin_info_storage[key]} "}
-                print "\n"
+                @admin_info_storage.each_key {|key| print "#{key}: #{@admin_info_storage[key]}, "}
+                print "\n\n"
 
                 pw_state = true
                 id_state = true
@@ -185,13 +185,13 @@ class Password_Manager
   def change_email
 
     print  "current email is: #{@admin_info_storage[:email]} \n" 
-    print "change email \n"
+    print "Change email requested: \n\n"
 
     enter_pw_turns_3 = 3
     enter_id_turns_3 = 3
     enter_name_turns_3 = 3
-    print "Now, you can enter your first name, user_id & password to change your email. \n"
-    print "For each category you have #{enter_name_turns_3} attempts remaining. \n"
+    print "Now, you can enter your first name, user_id & password for access to change your email. \n"
+    print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
 
     name_state = false
     while (name_state == false)
@@ -295,15 +295,13 @@ class Password_Manager
 
   def change_password
 
-    print "#{@admin_main_pw_storage[:main_pw_to_be_encrpt]} \n"
-    print "change password \n"
-
+    print "Change password requested: #{@admin_main_pw_storage[:main_pw_to_be_encrpt]} \n\n"
 
     enter_pw_turns_3 = 3
     enter_id_turns_3 = 3
     enter_name_turns_3 = 3
-    print "Now, you can enter your first name, user_id & password to change your email. \n"
-    print "For each category you have #{enter_name_turns_3} attempts remaining. \n"
+    print "Now, you can enter your first name, user_id & password for access to change your password. \n"
+    print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
 
     name_state = false
     while (name_state == false)
@@ -427,8 +425,10 @@ class Password_Manager
       a += 1
     end
 
-    print " orignal password is " + plain_text + "\n"
-    print " encrypted password is " + cipher_text + "\n"
+    puts "Your Password is encrpyted for maximum security. "
+
+    print "saved password is: " + plain_text + "\n"
+    print "encrypted password is: " + cipher_text + "\n"
 
   end
 
@@ -455,16 +455,17 @@ while (true)
   
   manager.encrpt_pw
 
-  print "continue?: \n \n"
+  print "\ncontinue?: press any key\n \n"
 
+  puts "Type 'stop' to save and exit. "
   if gets.chomp == "stop"
-    print "Your Password security is maximized. \n \n"
+    print "Your password security is maximized. \n \n"
     break
   else
-    print "ok: starting app engine \n \n"
+    print "ok: restarting app engine \n \n"
   end
 
 
-=end
+
 
 end
