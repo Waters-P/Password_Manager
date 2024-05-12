@@ -20,18 +20,18 @@ class Password_vault
 
   def add_to_vault
 
-    print " to add password, find the mystery word, in the mystery answer to the question: 'why do people 'drink' water?' \n"
+    print " to add password, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)
-      print "try again. to add password, find the mystery word in the mystery answer to the question: 'why do people drink water?' \n"
+      print "try again. to add password, find the mystery word, in the mystery answer, to the question: 'why do people drink water?' \n"
     end
     print "'eat' is the answer \n"
     
       a = 1
 
       while (true)
-        print "Enter password into the encyption vault: \n "
-        print "Your 1st password will be in 'vault 1', 2nd will be in 'vault 2' and so on: Remember your 'vault numbers'! "
+        print "Enter password into the encyption Vault: \n "
+        print "Your 1st password will be in 'Vault 1', 2nd will be in 'Vault 2' and so on: Remember your 'Vault numbers'! "
         
         needs_encryption = gets.chomp
         #new_pw = Password_vault.new
