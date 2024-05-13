@@ -21,7 +21,7 @@ class Password_vault
   def add_to_vault
 
     puts "Keep in mind you will not be able to edit any password stored in a vault :( \n"
-    print "\nTo add password, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
+    print "\nTo add password into Vault, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)
       print "try again. to add password, find the mystery word, in the mystery answer, to the question: 'why do people drink water?' \n"
@@ -57,7 +57,7 @@ class Password_vault
 
 
 
-  def encrpt_pw
+  def encrpt_pw_in_vault
 
     box_of_chars = [" ", "`","~","!","@","#","&","%","^","&","*","(",")","-","_","=","+","[","{","]","}","'\'","|",";",":","'",'"',",","<",".",">","/","?","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
@@ -133,7 +133,7 @@ class Password_vault
 
     #Decrpt
 
-    @decrpt_pw_vault.each_key {|key| puts "#{key}: #{@decrpt_pw_vault[key]} "}
+    #@decrpt_pw_vault.each_key {|key| puts "#{key}: #{@decrpt_pw_vault[key]} "}
    
   end
 
@@ -203,11 +203,14 @@ class Password_vault
 end
 
 
+=begin
 user = Password_vault.new
+
+user.display_pw_in_vault
 
 user.add_to_vault
 
-user.encrpt_pw
+user.encrpt_pw_in_vault
 
 user.display_pw_in_vault
 
@@ -216,3 +219,4 @@ user.delete_pw_in_vault
 user.display_pw_in_vault
 
 user.vault_balance
+=end

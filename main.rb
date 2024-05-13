@@ -1,3 +1,4 @@
+require_relative "password_locker"
 
 require_relative "new_admin_info_2"
 
@@ -7,7 +8,7 @@ require_relative "admin_password"
 
 
 
-class Password_Manager
+class The_Password_Manager
   
 
   def initialize
@@ -438,98 +439,109 @@ end
 
 
 # run the app
+def start
 
+  while (true)
 
-while (true)
+    manager = The_Password_Manager.new
+    the_pw_vault = Password_vault.new
 
-  manager = Password_Manager.new
+    manager.add_admin
 
-  manager.add_admin
+    puts "\ntype 'show to see admin account info"
+    
+      if gets.chomp == "show"
+        manager.show_admins
 
-  puts "\ntype 'show to see admin account info"
-  
-    if gets.chomp == "show"
-      manager.show_admins
-
-      menu_state = true
-      while (menu_state == true)  
-        menu_state = false
-        puts "Next you can:
-        1. change account email
-        2. change account password
-        3. encrypt account password
-        4. view password vault
-        5. exit"
-      
-        case gets.chomp
-        when "1"
-          puts "one"
-
-          manager.change_email
-          puts "main menu?"
-
-          if gets.chomp == "y"
-            menu_state = true
-          else
-            raise "invalid choice"
-          end
-        when "2"
-          puts "two"
-
-          manager.change_password
-          puts "main menu?"
-          if gets.chomp == "y"
-            menu_state = true
-          else
-            raise "no bueno"
-          end
+        menu_state = true
+        while (menu_state == true)  
+          menu_state = false
+          
+          puts "Next you can:
+          1. change account email
+          2. change account password
+          3. encrypt account password
+          4. view password vault
+          5. exit"
         
-        when "3"
-          puts "three"
+          case gets.chomp
+          when "1"
+            puts "one"
 
-          manager.encrpt_pw
-          puts "main menu?"
-          if gets.chomp == "y"
-            menu_state = true
-          else 
-            raise "yeah no"
-          end
-=begin
-        when "4"
-          puts "four"
+            manager.change_email
+            puts "main menu?"
 
-          manager.display_pw_in_vault
-          puts "main menu?"
-          if gets.chomp == "y"
-            menu_state = true
+            if gets.chomp == "y"
+              menu_state = true
+            else
+              raise "invalid choice"
+            end
+          when "2"
+            puts "two"
+
+            manager.change_password
+            puts "main menu?"
+            if gets.chomp == "y"
+              menu_state = true
+            else
+              raise "no bueno"
+            end
+          
+          when "3"
+            puts "three"
+
+            manager.encrpt_pw
+            puts "main menu?"
+            if gets.chomp == "y"
+              menu_state = true
+            else 
+              raise "yeah no"
+            end
+
+          when "4"
+            puts "four"
+
+            
+            the_pw_vault.display_pw_in_vault
+            puts "1. add to Vault
+                  2. encrypt the Vault
+                  3. remove from Vault
+                  4. Vault balance
+                  5. Display Vault"
+
+            case gets.chomp
+            when "1"
+              the_pw_vault.add_to_vault
+              the_pw_vault.encrpt_pw_in_vault
+              puts "main menu?"
+              if gets.chomp == "y"
+                menu_state = true
+              else 
+                raise "yeah no"
+              end
+            end
           end
-=end
         end
       end
-    end
 
-  gets.chomp        
-  
+    gets.chomp        
+    
 =begin  
-  #manager.change_email
 
-  manager.change_password
 
-  manager.show_admins
-  
-  manager.encrpt_pw
+    print "\ncontinue?: press any key\n \n"
 
-  print "\ncontinue?: press any key\n \n"
-
-  puts "Type 'stop' to save and exit. "
-  if gets.chomp == "stop"
-    print "Your password security is maximized. \n \n"
-    break
-  else
-    print "ok: restarting app engine \n \n"
-  end
+    puts "Type 'stop' to save and exit. "
+    if gets.chomp == "stop"
+      print "Your password security is maximized. \n \n"
+      break
+    else
+      print "ok: restarting app engine \n \n"
+    end
 
 =end
 
+
+  end
 
 end
