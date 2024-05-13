@@ -5,6 +5,8 @@ require_relative "admin_password"
 
 
 
+
+
 class Password_Manager
   
 
@@ -73,7 +75,7 @@ class Password_Manager
     @admin_main_pw_storage.store(:main_pw_to_be_encrpt, new_pw.main_pw_to_be_encrpt) 
 
 
-    puts "\nNew Administrator saved! Your user_id is: " + @id_vault.fetch(:account_id) + "\n\nYou will need this to access certain account services."
+    puts "\nNew Administrator saved! Your account_Badge ## is: " + @id_vault.fetch(:account_id) + "\n\nYou will need your Badge ## to access certain account services."
 
     
   end
@@ -84,7 +86,7 @@ class Password_Manager
     enter_pw_turns_3 = 3
     enter_id_turns_3 = 3
     enter_name_turns_3 = 3
-    print "Now, you can enter your first name & user_id to lookup your account info. \n"
+    print "Now, you can enter your first name, user_id & password to see your account info. \n"
     print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
 
     name_state = false
@@ -295,7 +297,7 @@ class Password_Manager
 
   def change_password
 
-    print "Change password requested: #{@admin_main_pw_storage[:main_pw_to_be_encrpt]} \n\n"
+    print "Change password requested: \n\n"
 
     enter_pw_turns_3 = 3
     enter_id_turns_3 = 3
@@ -442,11 +444,73 @@ while (true)
 
   manager = Password_Manager.new
 
-
   manager.add_admin
 
-  manager.show_admins
+  puts "\ntype 'show to see admin account info"
+  
+    if gets.chomp == "show"
+      manager.show_admins
 
+      menu_state = true
+      while (menu_state == true)  
+        menu_state = false
+        puts "Next you can:
+        1. change account email
+        2. change account password
+        3. encrypt account password
+        4. view password vault
+        5. exit"
+      
+        case gets.chomp
+        when "1"
+          puts "one"
+
+          manager.change_email
+          puts "main menu?"
+
+          if gets.chomp == "y"
+            menu_state = true
+          else
+            raise "invalid choice"
+          end
+        when "2"
+          puts "two"
+
+          manager.change_password
+          puts "main menu?"
+          if gets.chomp == "y"
+            menu_state = true
+          else
+            raise "no bueno"
+          end
+        
+        when "3"
+          puts "three"
+
+          manager.encrpt_pw
+          puts "main menu?"
+          if gets.chomp == "y"
+            menu_state = true
+          else 
+            raise "yeah no"
+          end
+=begin
+        when "4"
+          puts "four"
+
+          manager.display_pw_in_vault
+          puts "main menu?"
+          if gets.chomp == "y"
+            menu_state = true
+          end
+=end
+        end
+      end
+    end
+
+  gets.chomp        
+  
+=begin  
   #manager.change_email
 
   manager.change_password
@@ -465,7 +529,7 @@ while (true)
     print "ok: restarting app engine \n \n"
   end
 
-
+=end
 
 
 end

@@ -111,7 +111,7 @@ class Password_vault
       d += 1
     end
 
-    puts "Encrypting (100%) ^_^ \n"
+    puts "Encrypting (100%) ^_^ \n\n"
 
   end
 
