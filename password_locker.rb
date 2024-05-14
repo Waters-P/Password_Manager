@@ -90,29 +90,14 @@ class Password_vault
 
       @encrpt_pw_vault.store(c, cipher_text)
 
-      #Decrypt
-
-      cipher_text = @encrpt_pw_vault.fetch(d)
-      grandma = cipher_text.split("")
-
-      plain_text = ""
-
-      a = 0 
-      while (a < grandma.length)
-        dx = cipher.index(grandma[a])
-        plain_text += box_of_chars[dx]
-        a += 1
-      end
-
-      @decrpt_pw_vault.store(d, plain_text)
-
-
       b += 1
       c += 1
       d += 1
     end
 
     puts "\nEncrypting done (100%)    ^_^ \n\n"
+    puts "In a future update, Password Decryption will be enabled."
+    puts "For now safeguard your encryption in the Vault.\n"
 
   end
 
@@ -120,7 +105,7 @@ class Password_vault
   def display_pw_in_vault
 
 
-    puts "\nKeep in mind you will not be able to edit any password stored in a vault :( \n\n"
+    puts "\nPassword editing disabled :( \n\n"
     print "to gain inside Vault access, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)

@@ -28,7 +28,12 @@ class The_Password_Manager
                     26=>'A', 27=>'B', 28=>'C', 29=>'D', 30=>'E', 31=>'F', 32=>'G', 33=>'H', 34=>'I', 35=>'J', 36=>'K', 37=>'L', 38=>'M', 39=>'N',
                     40=>'O', 41=>'P', 42=>'Q', 43=>'R', 44=>'S', 45=>'T', 46=>'U', 47=>'V', 48=>'W', 49=>'X', 50=>'Y', 51=>'Z' }
     
-    print "Welcome, I am Password Manager, lets get you an account to explore my service \n"
+    
+    
+    
+    print "Welcome, I am Password Manager, I use a sturdy Vault to keep Encrpted Passwords secure.
+            \n Lets get you an account to explore my service \n"                
+            
    
     while (true)
 
@@ -112,9 +117,9 @@ class The_Password_Manager
             
               if pw == @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
 
-                puts "yes, you are in db\n\n"
+                puts "Found in db:\n\n"
 
-                @admin_info_storage.each_key {|key| print "#{key}: #{@admin_info_storage[key]}, "}
+                @admin_info_storage.each_value {|key| print "#{key} #{@admin_info_storage[key]} "}
                 print "\n\n"
 
                 pw_state = true
@@ -417,6 +422,9 @@ class The_Password_Manager
 
     # encrypting
 
+    progress =  rand(74).to_s 
+    puts "Encrypting in progress (#{progress}%)......." 
+
     plain_text = @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
     grandma = plain_text.split("")
 
@@ -425,13 +433,17 @@ class The_Password_Manager
     a = 0 
     while (a < grandma.length)
       dx = box_of_chars.index(grandma[a])
-      cipher_text += cipher[dx]
+      cipher_text += cipher[dx.to_i]
       a += 1
     end
 
-    puts "Your Password is encrpyted for maximum security. "
 
-    print "saved password is: " + plain_text + "\n"
+    puts "\nEncrypting done. (100%)    ^_^ \n\n"
+    puts "Your Account Password is encrpyted for maximum account security. "
+    puts "In a future update, Password Decryption will be enabled."
+    puts "For now store your encryption securely.\n"
+
+    
     print "encrypted password is: " + cipher_text + "\n"
 
   end
@@ -450,9 +462,9 @@ def start
 
     manager.add_admin
 
-    puts "\nType 'show' to see admin account info\n\n"
+    puts "\npress 'Enter' to Log in\n"
     
-      if gets.chomp == "show"
+      if gets.chomp == ""
         print "\n"
         manager.show_admins
 
@@ -461,11 +473,11 @@ def start
           menu_state = false
           
           puts "\nMain Menu options:
-          1. Change Account Email [press '1']
-          2. Change Account Password [press '2']
-          3. Encrypt Account Password [press '3']
-          4. Access Password Vault {press '4'}
-          5. Exit {press '5'}\n"
+          1. Change Account Email  _____ press 1 
+          2. Change Account Password  __ press 2
+          3. Encrypt Account Password  _ press 3 
+          4. Access Password Vault  ____ press 4 
+          5. Exit  .......  .......  ....press 5 \n"
         
           mm_option_state = false
           mm_option = 0
@@ -501,7 +513,7 @@ def start
             if (mainmenu == "m") || (mainmenu == "M")
               menu_state = true
             else
-              raise "No bueno"
+              raise "No bueno choice"
             end
           
           when "3"
@@ -519,10 +531,10 @@ def start
             
             the_pw_vault.display_pw_in_vault
             puts "\nVault options:
-                  1. Add to Vault (press '1')
-                  2. Remove from Vault (press '2')
-                  3. Vault balance (press '3')
-                  4. Display Vault (press '4') \n"
+                  1. Add to Vault        [ press 1 ]
+                  2. Remove from Vault   [ press 2 ]
+                  3. Vault balance       [ press 3 ]
+                  4. Display Vault       [ press 4 ] \n"
 
             vault_option_state = false
             vault_option = 0
@@ -591,9 +603,8 @@ def start
 
             
             puts "\nClosing Vault\n"
-            
-            
-              menu_state = true
+    
+            menu_state = true
             
             puts "\nVault closed\n"
             break
@@ -611,7 +622,7 @@ def start
       print "Safeguard. Protect. \n \n"
       break
     else
-      print "ok: restarting app engine \n \n"
+      print "ok: restarting.... \n \n"
       start_ = true
     end
 
