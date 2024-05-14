@@ -106,10 +106,10 @@ class Password_vault
 
 
     puts "\nPassword editing disabled :( \n\n"
-    print "to gain inside Vault access, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
+    print "To gain inside Vault access, find the mystery word, in the mystery answer, to the question: why do people 'drink' water? \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)
-      print "try again. to view inside Vault, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
+      print "Try again. To gain inside Vault access, find the mystery word, in the mystery answer, to the question: why do people 'drink' water? \n"
     end
 
     print "'eat' is the answer \n"
@@ -194,20 +194,4 @@ end
 
 
 
-=begin
-user = Password_vault.new
 
-user.display_pw_in_vault
-
-user.add_to_vault
-
-user.encrpt_pw_in_vault
-
-user.display_pw_in_vault
-
-user.delete_pw_in_vault
-
-user.display_pw_in_vault
-
-user.vault_balance
-=end

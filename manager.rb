@@ -6,8 +6,6 @@ require_relative "init_admin_password"
 
 
 
-
-
 class The_Password_Manager
   
 
@@ -31,8 +29,8 @@ class The_Password_Manager
     
     
     
-    print "Welcome, I am Password Manager, I use a sturdy Vault to keep Encrpted Passwords secure.
-            \n Lets get you an account to explore my service \n"                
+    print "\nWelcome, I am Password Manager, I use a sturdy Vault to encrypt passwords & secure them.
+            \nLets get you an account to explore my service \n\n"                
             
    
     while (true)
@@ -60,7 +58,7 @@ class The_Password_Manager
     end
     #print "Type your surname: "
     #lst_name = gets.chomp
-    print "And your email: "
+    print "\nAnd your email: "
     email = gets.chomp
     #print "Create a username: "
     #username = gets.chomp
@@ -73,7 +71,7 @@ class The_Password_Manager
     @admin_info_storage.store(:email, user.email)
     @id_vault.store(:account_id, user.account_id.to_s)
 
-    print  "And for you to create a password. It will be encrypted for maximum account protection: "
+    print  "\nAnd for you to create a password. It will be encrypted for maximum account protection: "
     main_pw_to_be_encrpt = gets.chomp
     new_pw = Admin_main_Password.new(main_pw_to_be_encrpt)
 
@@ -81,7 +79,7 @@ class The_Password_Manager
     @admin_main_pw_storage.store(:main_pw_to_be_encrpt, new_pw.main_pw_to_be_encrpt) 
 
 
-    puts "\nNew Administrator saved! Your account_Badge ## is: " + @id_vault.fetch(:account_id) + "\n\nYou will need your Badge ## to access certain account services.\n\n"
+    puts "\nNew Administrator added! Your account_Badge ## is: " + @id_vault.fetch(:account_id) + "\n\nYou will need your Badge ## to access certain account services.\n\n"
     puts "Badge ##: " + @id_vault.fetch(:account_id)
 
     
@@ -93,26 +91,26 @@ class The_Password_Manager
     enter_pw_turns_3 = 3
     enter_id_turns_3 = 3
     enter_name_turns_3 = 3
-    print "Now, you can enter your first name, user_id & password to see your account info. \n"
+    print "Now you can enter your first name, user_id & password to see your account info. \n"
     print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
 
     name_state = false
     while (name_state == false)
-    print "enter first name: \n"
+    print "\nenter first name: \n"
     first_name = gets.chomp
 
       if @admin_info_storage.has_value?(first_name)
         
         id_state = false
         while (id_state == false)
-        puts "enter your user_id: "
+        puts "\nenter badge ##: "
         id = gets.chomp
 
           if @id_vault.has_value?(id)
             
             pw_state = false
             while (pw_state == false)
-            print "What is your password? \n"
+            print "\nWhat is your password? \n"
             pw = gets.chomp
             
               if pw == @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
@@ -147,7 +145,7 @@ class The_Password_Manager
             end
 
           else 
-            print "wrong id :( : '#{id}' not in db. \n"
+            print "wrong badge ## :( : '#{id}' not in db. \n"
             if enter_id_turns_3 > 1
               puts "Try again #{enter_id_turns_3 - 1} attempts remaining"
             else 
@@ -444,9 +442,11 @@ class The_Password_Manager
     puts "For now store your encryption securely.\n"
 
     
-    print "encrypted password is: " + cipher_text + "\n"
+    print "\nEncrypted password: " + cipher_text + "\n"
 
   end
+
+
 
 end  
 
@@ -602,11 +602,11 @@ def start
           when "5"
 
             
-            puts "\nClosing Vault\n"
+            puts "\nLogging out\n"
     
             menu_state = true
             
-            puts "\nVault closed\n"
+            puts "\nAccount closed\n"
             break
           end
         end
@@ -615,9 +615,9 @@ def start
        
       end       
 
-    print "\ncontinue?: press any key\n \n"
+    print "\nRestart?: press any key\n"
 
-    puts "Type 'stop' to save and exit.\n "
+    puts "\nType 'stop' to go home.\n "
     if gets.chomp == "stop"
       print "Safeguard. Protect. \n \n"
       break
