@@ -1,6 +1,4 @@
 
-#require_relative "manager"
+require_relative "manager"
 
-#start
-
-
+start

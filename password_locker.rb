@@ -42,7 +42,7 @@ class Password_vault
         print "type 'stop' to exit or press 'press any button' to add more \n"
 
         if gets.chomp == "stop"
-          print "Your Password security is being maximized. \n \n"
+          print "Your Password security is maximized. \n \n"
           break
         else
           print "ok: create another password for the encryption vault  \n \n"
@@ -112,7 +112,7 @@ class Password_vault
       d += 1
     end
 
-    puts "Encrypting (100%) ^_^ \n\n"
+    puts "\nEncrypting done (100%)    ^_^ \n\n"
 
   end
 
@@ -130,7 +130,7 @@ class Password_vault
     print "'eat' is the answer \n"
 
     print "\nViewing inside Vault: \n \n"
-    @encrpt_pw_vault.each_key {|key| puts "#{key}: #{@encrpt_pw_vault[key]} "}
+    @encrpt_pw_vault.each_key {|key| puts "Vault #{key}: #{@encrpt_pw_vault[key]}\n "}
 
     #Decrpt
 
@@ -147,30 +147,31 @@ class Password_vault
       while (v_n_state == false)
         print "delete a password using its 'vault number': "
         v_n = gets.chomp
-        v_n = v_n.to_f
+       
+        v_n = v_n.to_s
 
         pp v_n.class
 
-        if v_n.class == Float
-          v_n = v_n.to_s
-          
-          if v_n.include? "." 
-            puts "must be a whole number"
+        if (v_n.include? ".")
+        
+          pp v_n
+          puts "\nInvalid key"
+          v_n = v_n.to_f
+          if v_n == 0.0
+            puts "\nInvalid key"
             break
-          end          
-          
-          break
-
+          end  
+                 
         else
           v_n = v_n.to_i
           v_n_state = true
         end
       end
       
-      if @encrpt_pw_vault.has_key?(v_n)
+      if @pw_vault.has_key?(v_n)||@encrpt_pw_vault.has_key?(v_n)||@decrpt_pw_vault.has_key?(v_n)
 
         v_n_state = true
-        puts "deleting vault: #{v_n}"
+        puts "\ndeleting vault: #{v_n}"
         @pw_vault.delete(v_n)
         @encrpt_pw_vault.delete(v_n)
         @decrpt_pw_vault.delete(v_n)
@@ -194,19 +195,20 @@ class Password_vault
 
   def vault_balance
 
-    print "pw vault balance: #{@pw_vault.length} \n"
-    print "encrpt_pw_vault_balance: #{@encrpt_pw_vault.length} \n"
-    print "decrpt_pw_vault_balance: #{@decrpt_pw_vault.length} \n"
+    print "Vault balance: #{@pw_vault.length} \n"
+    print "Encrptions in Vault: #{@encrpt_pw_vault.length} \n"
+    #print "decrpt_pw_vault_balance: #{@decrpt_pw_vault.length} \n"
 
   end 
 
 
 end
 
-user = Password_vault.new
 
-user.add_to_vault
-user.encrpt_pw_in_vault
+
+
+
+
 =begin
 user = Password_vault.new
 

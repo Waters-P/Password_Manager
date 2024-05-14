@@ -1,8 +1,8 @@
 require_relative "password_locker"
 
-require_relative "new_admin_info_2"
+require_relative "init_admin_info"
 
-require_relative "admin_password"
+require_relative "init_admin_password"
 
 
 
@@ -76,7 +76,8 @@ class The_Password_Manager
     @admin_main_pw_storage.store(:main_pw_to_be_encrpt, new_pw.main_pw_to_be_encrpt) 
 
 
-    puts "\nNew Administrator saved! Your account_Badge ## is: " + @id_vault.fetch(:account_id) + "\n\nYou will need your Badge ## to access certain account services."
+    puts "\nNew Administrator saved! Your account_Badge ## is: " + @id_vault.fetch(:account_id) + "\n\nYou will need your Badge ## to access certain account services.\n\n"
+    puts "Badge ##: " + @id_vault.fetch(:account_id)
 
     
   end
@@ -441,16 +442,18 @@ end
 # run the app
 def start
 
-  while (true)
+  start_ = true
+  while (start_ == true)
 
     manager = The_Password_Manager.new
     the_pw_vault = Password_vault.new
 
     manager.add_admin
 
-    puts "\ntype 'show to see admin account info"
+    puts "\nType 'show' to see admin account info\n\n"
     
       if gets.chomp == "show"
+        print "\n"
         manager.show_admins
 
         menu_state = true
@@ -458,89 +461,112 @@ def start
           menu_state = false
           
           puts "Next you can:
-          1. change account email
-          2. change account password
-          3. encrypt account password
-          4. view password vault
-          5. exit"
+          1. Change Account Email
+          2. Change Account Password
+          3. Encrypt Account Password
+          4. View Password Vault
+          5. Exit\n"
         
           case gets.chomp
           when "1"
-            puts "one"
-
+           
             manager.change_email
-            puts "main menu?"
+            puts "\npress 'm' for Main Menu"
 
-            if gets.chomp == "y"
+            mainmenu = gets.chomp
+            if (mainmenu == "m") || (mainmenu == "M")
               menu_state = true
             else
-              raise "invalid choice"
+              raise "Invalid choice"
             end
-          when "2"
-            puts "two"
 
+          when "2"
+            
             manager.change_password
-            puts "main menu?"
-            if gets.chomp == "y"
+            puts "\npress 'm' for Main Menu"
+            mainmenu = gets.chomp
+            if (mainmenu == "m") || (mainmenu == "M")
               menu_state = true
             else
-              raise "no bueno"
+              raise "No bueno"
             end
           
           when "3"
-            puts "three"
 
             manager.encrpt_pw
-            puts "main menu?"
-            if gets.chomp == "y"
+            puts "\npress 'm' for Main Menu"
+            mainmenu = gets.chomp
+            if (mainmenu == "m") || (mainmenu == "M")
               menu_state = true
             else 
               raise "yeah no"
             end
 
           when "4"
-            puts "four"
-
             
             the_pw_vault.display_pw_in_vault
-            puts "1. add to Vault
-                  2. encrypt the Vault
-                  3. remove from Vault
-                  4. Vault balance
-                  5. Display Vault"
+            puts "\nVault options:
+                  1. Add to Vault
+                  2. Remove from Vault
+                  3. Vault balance
+                  4. Display Vault\n"
 
-            case gets.chomp
+            option_state = false
+            option = 0
+            while (option_state == false)
+              option = gets.chomp
+              if(option!="1"&&option!="2"&&option!="3"&&option!="4")
+                puts "Invalid input"
+                     
+              else
+                option_state = true
+              end
+            end
+                  
+            case option
+                    
             when "1"
+
               the_pw_vault.add_to_vault
               the_pw_vault.encrpt_pw_in_vault
-              puts "main menu?"
-              if gets.chomp == "y"
+              puts "press 'm' for Main Menu"
+              mainmenu = gets.chomp
+              if (mainmenu == "m") || (mainmenu == "M")
+                menu_state = true
+              else 
+                 raise "yeah no"
+              end
+                  
+            when "2"
+
+              the_pw_vault.delete_pw_in_vault
+              
+              puts "\npress 'm' for Main Menu"
+              mainmenu = gets.chomp
+              if (mainmenu == "m") || (mainmenu == "M")
                 menu_state = true
               else 
                 raise "yeah no"
               end
+
+
             end
           end
         end
-      end
-
-    gets.chomp        
-    
-=begin  
-
+      else
+        start_ = false  
+       
+      end       
 
     print "\ncontinue?: press any key\n \n"
 
-    puts "Type 'stop' to save and exit. "
+    puts "Type 'stop' to save and exit.\n "
     if gets.chomp == "stop"
       print "Your password security is maximized. \n \n"
       break
     else
       print "ok: restarting app engine \n \n"
     end
-
-=end
-
 
   end
 
