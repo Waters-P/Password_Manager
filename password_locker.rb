@@ -121,7 +121,7 @@ class Password_vault
 
 
     puts "\nKeep in mind you will not be able to edit any password stored in a vault :( \n\n"
-    print "to view inside Vault, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
+    print "to gain inside Vault access, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)
       print "try again. to view inside Vault, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
@@ -196,7 +196,7 @@ class Password_vault
   def vault_balance
 
     print "Vault balance: #{@pw_vault.length} \n"
-    print "Encrptions in Vault: #{@encrpt_pw_vault.length} \n"
+    print "Encryptions in Vault: #{@encrpt_pw_vault.length} \n"
     #print "decrpt_pw_vault_balance: #{@decrpt_pw_vault.length} \n"
 
   end 

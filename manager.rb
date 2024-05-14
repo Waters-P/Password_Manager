@@ -460,14 +460,27 @@ def start
         while (menu_state == true)  
           menu_state = false
           
-          puts "Next you can:
-          1. Change Account Email
-          2. Change Account Password
-          3. Encrypt Account Password
-          4. View Password Vault
-          5. Exit\n"
+          puts "\nMain Menu options:
+          1. Change Account Email [press '1']
+          2. Change Account Password [press '2']
+          3. Encrypt Account Password [press '3']
+          4. Access Password Vault {press '4'}
+          5. Exit {press '5'}\n"
         
-          case gets.chomp
+          mm_option_state = false
+          mm_option = 0
+          while (mm_option_state == false)
+            mm_option = gets.chomp
+            if(mm_option!="1"&&mm_option!="2"&&mm_option!="3"&&mm_option!="4"&&mm_option!="5")
+              puts "Invalid input"
+                     
+            else
+              mm_option_state = true
+            end
+          end
+                  
+          case mm_option
+
           when "1"
            
             manager.change_email
@@ -499,31 +512,31 @@ def start
             if (mainmenu == "m") || (mainmenu == "M")
               menu_state = true
             else 
-              raise "yeah no"
+              raise "press m or M only"
             end
 
           when "4"
             
             the_pw_vault.display_pw_in_vault
             puts "\nVault options:
-                  1. Add to Vault
-                  2. Remove from Vault
-                  3. Vault balance
-                  4. Display Vault\n"
+                  1. Add to Vault (press '1')
+                  2. Remove from Vault (press '2')
+                  3. Vault balance (press '3')
+                  4. Display Vault (press '4') \n"
 
-            option_state = false
-            option = 0
-            while (option_state == false)
-              option = gets.chomp
-              if(option!="1"&&option!="2"&&option!="3"&&option!="4")
+            vault_option_state = false
+            vault_option = 0
+            while (vault_option_state == false)
+              vault_option = gets.chomp
+              if(vault_option!="1"&&vault_option!="2"&&vault_option!="3"&&vault_option!="4")
                 puts "Invalid input"
                      
               else
-                option_state = true
+                vault_option_state = true
               end
             end
                   
-            case option
+            case vault_option
                     
             when "1"
 
@@ -534,7 +547,7 @@ def start
               if (mainmenu == "m") || (mainmenu == "M")
                 menu_state = true
               else 
-                 raise "yeah no"
+                 raise "press m or M only"
               end
                   
             when "2"
@@ -546,11 +559,44 @@ def start
               if (mainmenu == "m") || (mainmenu == "M")
                 menu_state = true
               else 
-                raise "yeah no"
+                raise "press m or M only"
               end
 
+            when "3"
 
+              the_pw_vault.vault_balance
+              
+              puts "\npress 'm' for Main Menu"
+              mainmenu = gets.chomp
+              if (mainmenu == "m") || (mainmenu == "M")
+                menu_state = true
+              else 
+                raise "press m or M only"
+              end
+
+            when "4"
+
+              the_pw_vault.display_pw_in_vault
+              
+              puts "\npress 'm' for Main Menu"
+              mainmenu = gets.chomp
+              if (mainmenu == "m") || (mainmenu == "M")
+                menu_state = true
+              else 
+                raise "press m or M only"
+              end
             end
+
+          when "5"
+
+            
+            puts "\nClosing Vault\n"
+            
+            
+              menu_state = true
+            
+            puts "\nVault closed\n"
+            break
           end
         end
       else
@@ -562,10 +608,11 @@ def start
 
     puts "Type 'stop' to save and exit.\n "
     if gets.chomp == "stop"
-      print "Your password security is maximized. \n \n"
+      print "Safeguard. Protect. \n \n"
       break
     else
       print "ok: restarting app engine \n \n"
+      start_ = true
     end
 
   end
