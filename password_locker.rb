@@ -67,7 +67,8 @@ class Password_vault
 
     # encrypting
 
-    puts "Encryting in progress (14%)..."
+    progress =  rand(34).to_s 
+    puts "Encrypting in progress (#{progress}%)....." 
 
     b = 1
     c = 1
@@ -202,7 +203,10 @@ class Password_vault
 
 end
 
+user = Password_vault.new
 
+user.add_to_vault
+user.encrpt_pw_in_vault
 =begin
 user = Password_vault.new
 
