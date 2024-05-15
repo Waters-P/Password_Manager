@@ -248,7 +248,6 @@ class Password_vault
 
     print "Vault balance: #{@pw_vault.length} \n"
     print "Encryptions in Vault: #{@encrpt_pw_vault.length} \n"
-    #print "decrpt_pw_vault_balance: #{@decrpt_pw_vault.length} \n"
 
   end 
 
