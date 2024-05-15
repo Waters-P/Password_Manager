@@ -33,12 +33,12 @@ class The_Password_Manager < Password_vault
     
     
     print "\nWelcome, I am Password Manager, I use a sturdy Vault to encrypt passwords & secure them.
-            \nLets get you an account to explore my service \n\n"                
+            \nLets get you an account to explore my service \n"                
             
    
     while (true)
 
-      print "For now I only need your 1st name: "
+      print "\nFor now I only need your 1st name: "
       dx = 0
       state = true
       first_name = gets.chomp
@@ -49,8 +49,9 @@ class The_Password_Manager < Password_vault
         if alpha_table.has_value?(first_name_alphas[dx])
           
         else
-          puts "All letters in name must be alpha "
+          puts "\nUse 'a-z' or 'A-Z' letters only. '#{first_name_alphas[dx]}' not in range 'a-z' or 'A-Z'"
           state = false
+          break
         end
         dx += 1
       end
@@ -91,7 +92,7 @@ class The_Password_Manager < Password_vault
     enter_pw_turns_3 = 3
     enter_badge_turns_3 = 3
     enter_name_turns_3 = 3
-    print "Now you can enter your first name, user_id & password to see your account info. \n"
+    print "Now use your 1st name, badge ## & password to get access to my service. \n"
     print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
 
     name_state = false
@@ -125,7 +126,7 @@ class The_Password_Manager < Password_vault
                 name_state = true
                 
               else 
-                print "wrong password -x? : '#{pw}' not in database. \n"
+                print "Fictional password -x? : '#{pw}' not in database. \n"
                 if enter_pw_turns_3 > 1
                   puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
                 else 
@@ -145,11 +146,11 @@ class The_Password_Manager < Password_vault
             end
 
           else 
-            print "wrong badge ## :( : '#{id}' not in database. \n"
+            print "Fictional badge ## :( : '#{id}' not in database. \n"
             if enter_badge_turns_3 > 1
               puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect id numbers"
+              puts "Too many incorrect badge ## numbers"
             end
           end
 
@@ -165,12 +166,12 @@ class The_Password_Manager < Password_vault
         end
 
       else
-        print "'#{first_name}' not in database. Check Spelling \n \n"
+        print "\n'#{first_name}' not in database. Check Spelling \n \n"
         
             if enter_name_turns_3 > 1
               puts "Try again #{enter_name_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect name spelling"
+              puts "Too many incorrect name spellings"
             end
       end
     
