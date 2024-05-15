@@ -4,4 +4,4 @@ This is a password manager that creates an executive account
 
 To use the manager successfully,
 
-  the exec will need to remember their badge #no. & account password and answer a security question.  ^_-
+  the exec will need to remember their badge #no. & account password & answer a security question.  ^_-
