@@ -124,7 +124,7 @@ class Password_vault
 
 
     puts "\nPassword editing disabled :( \n\n"
-    print "To gain inside Vault access, enter the mystery word, in the mystery answer, to the question: why do people 'drink' water? \n"
+    print "Required: enter the mystery word, in the mystery answer, to the question: why do people 'drink' water? \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)
       print "Try again. To gain inside Vault access, find the mystery word, in the mystery answer, to the question: why do people 'drink' water? \n"
@@ -201,7 +201,7 @@ class Password_vault
        
         v_n = v_n.to_s
 
-        pp v_n.class
+        
 
         if (v_n.include? ".")
         
@@ -228,7 +228,7 @@ class Password_vault
         @decrpt_pw_vault.delete(v_n)
         
       else
-        puts "Vault number: #{v_n}, not in database"
+        puts "\nVault number: <> Not found <>"
       end
 
       print "\nRemove passwords? 'press any button' for yes, or 'n' for no: \n \n"

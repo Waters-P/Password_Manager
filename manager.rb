@@ -96,26 +96,26 @@ class The_Password_Manager < Password_vault
 
     name_state = false
     while (name_state == false)
-    print "\nenter first name: \n"
+    print "\nfirst name: \n"
     first_name = gets.chomp
 
       if @admin_info_storage.has_value?(first_name)
         
         id_state = false
         while (id_state == false)
-        puts "\nenter badge ##: "
+        puts "\nbadge ##: "
         id = gets.chomp
 
           if @id_vault.has_value?(id)
             
             pw_state = false
             while (pw_state == false)
-            print "\nWhat is your password? \n"
+            print "\npassword: \n"
             pw = gets.chomp
             
               if pw == @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
 
-                puts "Found in db:\n\n"
+                puts "Found in database:\n\n"
 
                 @admin_info_storage.each_value {|key| print "#{key} #{@admin_info_storage[key]} "}
                 print "\n\n"
@@ -125,7 +125,7 @@ class The_Password_Manager < Password_vault
                 name_state = true
                 
               else 
-                print "wrong password -x? : '#{pw}' not in db. \n"
+                print "wrong password -x? : '#{pw}' not in database. \n"
                 if enter_pw_turns_3 > 1
                   puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
                 else 
@@ -145,7 +145,7 @@ class The_Password_Manager < Password_vault
             end
 
           else 
-            print "wrong badge ## :( : '#{id}' not in db. \n"
+            print "wrong badge ## :( : '#{id}' not in database. \n"
             if enter_badge_turns_3 > 1
               puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
@@ -165,7 +165,7 @@ class The_Password_Manager < Password_vault
         end
 
       else
-        print "'#{first_name}' not in db. Check Spelling \n \n"
+        print "'#{first_name}' not in database. Check Spelling \n \n"
         
             if enter_name_turns_3 > 1
               puts "Try again #{enter_name_turns_3 - 1} attempts remaining"
@@ -196,17 +196,12 @@ class The_Password_Manager < Password_vault
 
     enter_pw_turns_3 = 3
     enter_badge_turns_3 = 3
-    enter_name_turns_3 = 3
+    
 
-    print "Requirements: admin's first name, badge ## & password for access to change email. \n"
-    print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
+    print "Requirements: badge ## & password for access to change email. \n"
+    print "For each category you have #{enter_badge_turns_3} attempts remaining. \n\n"
 
-    name_state = false
-    while (name_state == false)
-    print "enter first name: \n"
-    first_name = gets.chomp
-
-      if @admin_info_storage.has_value?(first_name)
+    
         
         id_state = false
         while (id_state == false)
@@ -235,7 +230,7 @@ class The_Password_Manager < Password_vault
                 name_state = true
                 
               else 
-                print "invalid password -x? : '#{pw}' not in db. \n"
+                print "invalid password -x? : '#{pw}' not in database. \n"
                 if enter_pw_turns_3 > 1
                   puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
                 else 
@@ -255,7 +250,7 @@ class The_Password_Manager < Password_vault
             end
 
           else 
-            print "invalid badge ## :( : '#{id}' not in db. \n"
+            print "invalid badge ## :( : '#{id}' not in database. \n"
             if enter_badge_turns_3 > 1
               puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
@@ -266,37 +261,15 @@ class The_Password_Manager < Password_vault
           if id_state == true
             break
           end
+
           enter_badge_turns_3 -= 1
+
           if enter_badge_turns_3 < 1
             puts "Contact Support."
             raise "#{enter_badge_turns_3} attempts remaining"
           end
 
         end
-
-      else
-        print "'#{first_name}' not in db. Check Spelling \n \n"
-        
-            if enter_name_turns_3 > 1
-              puts "Try again #{enter_name_turns_3 - 1} attempts remaining"
-            else 
-              puts "Too many incorrect name entries"
-            end
-      end
-    
-
-    if name_state == true
-      break
-    end  
-    enter_name_turns_3 -= 1  
-
-    if enter_name_turns_3 < 1
-      puts "Contact Support."
-      raise "#{enter_name_turns_3} attempts remaining"
-    end
-
-    end
-
 
   end
 
@@ -307,16 +280,11 @@ class The_Password_Manager < Password_vault
 
     enter_pw_turns_3 = 3
     enter_badge_turns_3 = 3
-    enter_name_turns_3 = 3
-    print "Now you can enter your first name, user_id & password for access to change your password. \n"
-    print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
+    
+    print "Confirm your badge ## & password for access to change your password. \n"
+    print "For each category you have #{enter_badge_turns_3} attempts remaining. \n\n"
 
-    name_state = false
-    while (name_state == false)
-    print "enter first name: \n"
-    first_name = gets.chomp
-
-      if @admin_info_storage.has_value?(first_name)
+   
         
         id_state = false
         while (id_state == false)
@@ -345,7 +313,7 @@ class The_Password_Manager < Password_vault
                 name_state = true
                 
               else 
-                print "invalid password -x? : '#{pw}' not in db. \n"
+                print "invalid password -x? : '#{pw}' not in database. \n"
                 if enter_pw_turns_3 > 1
                   puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
                 else 
@@ -365,7 +333,7 @@ class The_Password_Manager < Password_vault
             end
 
           else 
-            print "invalid badge ## :( : '#{id}' not in db. \n"
+            print "invalid badge ## :( : '#{id}' not in database. \n"
             if enter_badge_turns_3 > 1
               puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
@@ -384,28 +352,7 @@ class The_Password_Manager < Password_vault
 
         end
 
-      else
-        print "'#{first_name}' not in db. Check Spelling \n \n"
-        
-            if enter_name_turns_3 > 1
-              puts "Try again #{enter_name_turns_3 - 1} attempts remaining"
-            else 
-              puts "Too many incorrect name entries"
-            end
-      end
-    
-
-    if name_state == true
-      break
-    end  
-    enter_name_turns_3 -= 1  
-
-    if enter_name_turns_3 < 1
-      puts "Contact Support."
-      raise "#{enter_name_turns_3} attempts remaining"
-    end
-
-    end
+      
 
 
   end
