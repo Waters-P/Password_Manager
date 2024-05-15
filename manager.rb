@@ -6,10 +6,13 @@ require_relative "init_admin_password"
 
 
 
-class The_Password_Manager
+class The_Password_Manager < Password_vault 
   
 
   def initialize
+
+    super
+
     @admin_info_storage = {}
 
     @admin_main_pw_storage = {}
@@ -24,7 +27,7 @@ class The_Password_Manager
                     13=>'n', 14=>'o', 15=>'p', 16=>'q', 17=>'r', 18=>'s', 19=>'t', 20=>'u', 21=>'v', 22=>'w', 23=>'x', 24=>'y', 25=>'z',
                     
                     26=>'A', 27=>'B', 28=>'C', 29=>'D', 30=>'E', 31=>'F', 32=>'G', 33=>'H', 34=>'I', 35=>'J', 36=>'K', 37=>'L', 38=>'M', 39=>'N',
-                    40=>'O', 41=>'P', 42=>'Q', 43=>'R', 44=>'S', 45=>'T', 46=>'U', 47=>'V', 48=>'W', 49=>'X', 50=>'Y', 51=>'Z' }
+                    40=>'O', 41=>'P', 42=>'Q', 43=>'R', 44=>'S', 45=>'T', 46=>'U', 47=>'V', 48=>'W', 49=>'X', 50=>'Y', 51=>'Z', 53=>'-', 54=>'_', 55=>'`' }
     
     
     
@@ -56,14 +59,11 @@ class The_Password_Manager
       end
     
     end
-    #print "Type your surname: "
-    #lst_name = gets.chomp
+
     print "\nAnd your email: "
     email = gets.chomp
-    #print "Create a username: "
-    #username = gets.chomp
    
-    user = Admin_info.new(first_name, email)  #lst_name, , username,
+    user = Admin_info.new(first_name, email)  
     account_id = user.account_id.to_s
 
 
@@ -79,8 +79,8 @@ class The_Password_Manager
     @admin_main_pw_storage.store(:main_pw_to_be_encrpt, new_pw.main_pw_to_be_encrpt) 
 
 
-    puts "\nNew Administrator added! Your account_Badge ## is: " + @id_vault.fetch(:account_id) + "\n\nYou will need your Badge ## to access certain account services.\n\n"
-    puts "Badge ##: " + @id_vault.fetch(:account_id)
+    puts "\nNew Administrator added! Your account_Badge ## is: " + @id_vault.fetch(:account_id) + "\n\nYou will need your Badge ## to access certain account services.\n"
+    puts "\nBadge ##: " + @id_vault.fetch(:account_id)
 
     
   end
@@ -89,7 +89,7 @@ class The_Password_Manager
   def show_admins
 
     enter_pw_turns_3 = 3
-    enter_id_turns_3 = 3
+    enter_badge_turns_3 = 3
     enter_name_turns_3 = 3
     print "Now you can enter your first name, user_id & password to see your account info. \n"
     print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
@@ -146,8 +146,8 @@ class The_Password_Manager
 
           else 
             print "wrong badge ## :( : '#{id}' not in db. \n"
-            if enter_id_turns_3 > 1
-              puts "Try again #{enter_id_turns_3 - 1} attempts remaining"
+            if enter_badge_turns_3 > 1
+              puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
               puts "Too many incorrect id numbers"
             end
@@ -156,10 +156,10 @@ class The_Password_Manager
           if id_state == true
             break
           end
-          enter_id_turns_3 -= 1
-          if enter_id_turns_3 < 1
+          enter_badge_turns_3 -= 1
+          if enter_badge_turns_3 < 1
             puts "Contact Support."
-            raise "#{enter_id_turns_3} attempts remaining"
+            raise "#{enter_badge_turns_3} attempts remaining"
           end
 
         end
@@ -191,13 +191,14 @@ class The_Password_Manager
 
   def change_email
 
-    print  "current email is: #{@admin_info_storage[:email]} \n" 
+    print "Email: #{@admin_info_storage[:email]} \n" 
     print "Change email requested: \n\n"
 
     enter_pw_turns_3 = 3
-    enter_id_turns_3 = 3
+    enter_badge_turns_3 = 3
     enter_name_turns_3 = 3
-    print "Now, you can enter your first name, user_id & password for access to change your email. \n"
+
+    print "Requirements: admin's first name, badge ## & password for access to change email. \n"
     print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
 
     name_state = false
@@ -209,24 +210,24 @@ class The_Password_Manager
         
         id_state = false
         while (id_state == false)
-        puts "enter your user_id: "
+        puts "enter badge ##: "
         id = gets.chomp
 
           if @id_vault.has_value?(id)
             
             pw_state = false
             while (pw_state == false)
-            print "What is your password? \n"
+            print "enter password: \n"
             pw = gets.chomp
             
               if pw == @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
 
-                puts "yes, you are in db\n"
+                puts "request approved......\n"
 
-                puts "type new email: "
+                puts "\nType new email: \n"
                 @admin_info_storage[:email] = gets.chomp
 
-                print "new email#{@admin_info_storage[:email]} \n" 
+                print "\nEmail is now: #{@admin_info_storage[:email]} \n" 
 
 
                 pw_state = true
@@ -234,11 +235,11 @@ class The_Password_Manager
                 name_state = true
                 
               else 
-                print "wrong password -x? : '#{pw}' not in db. \n"
+                print "invalid password -x? : '#{pw}' not in db. \n"
                 if enter_pw_turns_3 > 1
                   puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
                 else 
-                  puts "Too many incorrect passwords"
+                  puts "Too many incorrect password entries"
                 end
               end  
               
@@ -254,21 +255,21 @@ class The_Password_Manager
             end
 
           else 
-            print "wrong id :( : '#{id}' not in db. \n"
-            if enter_id_turns_3 > 1
-              puts "Try again #{enter_id_turns_3 - 1} attempts remaining"
+            print "invalid badge ## :( : '#{id}' not in db. \n"
+            if enter_badge_turns_3 > 1
+              puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect id numbers"
+              puts "Too many incorrect badge ## entries"
             end
           end
 
           if id_state == true
             break
           end
-          enter_id_turns_3 -= 1
-          if enter_id_turns_3 < 1
+          enter_badge_turns_3 -= 1
+          if enter_badge_turns_3 < 1
             puts "Contact Support."
-            raise "#{enter_id_turns_3} attempts remaining"
+            raise "#{enter_badge_turns_3} attempts remaining"
           end
 
         end
@@ -279,7 +280,7 @@ class The_Password_Manager
             if enter_name_turns_3 > 1
               puts "Try again #{enter_name_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect name spelling"
+              puts "Too many incorrect name entries"
             end
       end
     
@@ -305,9 +306,9 @@ class The_Password_Manager
     print "Change password requested: \n\n"
 
     enter_pw_turns_3 = 3
-    enter_id_turns_3 = 3
+    enter_badge_turns_3 = 3
     enter_name_turns_3 = 3
-    print "Now, you can enter your first name, user_id & password for access to change your password. \n"
+    print "Now you can enter your first name, user_id & password for access to change your password. \n"
     print "For each category you have #{enter_name_turns_3} attempts remaining. \n\n"
 
     name_state = false
@@ -319,23 +320,23 @@ class The_Password_Manager
         
         id_state = false
         while (id_state == false)
-        puts "enter your user_id: "
+        puts "enter badge ##: "
         id = gets.chomp
 
           if @id_vault.has_value?(id)
             
             pw_state = false
             while (pw_state == false)
-            print "What is your password? \n"
+            print "enter password: \n"
             pw = gets.chomp
             
               if pw == @admin_main_pw_storage.fetch(:main_pw_to_be_encrpt)
 
-                puts "yes, you are in db\n"
-                puts "create new password: "
+                puts "request approved......\n"
+                print "\nCreate new password: "
 
                 @admin_main_pw_storage[:main_pw_to_be_encrpt] = gets.chomp
-                print "new password: #{@admin_main_pw_storage[:main_pw_to_be_encrpt]} \n"
+                print "New password: #{@admin_main_pw_storage[:main_pw_to_be_encrpt]} \n"
 
                 
 
@@ -344,11 +345,11 @@ class The_Password_Manager
                 name_state = true
                 
               else 
-                print "wrong password -x? : '#{pw}' not in db. \n"
+                print "invalid password -x? : '#{pw}' not in db. \n"
                 if enter_pw_turns_3 > 1
                   puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
                 else 
-                  puts "Too many incorrect passwords"
+                  puts "Too many incorrect password entries"
                 end
               end  
               
@@ -364,21 +365,21 @@ class The_Password_Manager
             end
 
           else 
-            print "wrong id :( : '#{id}' not in db. \n"
-            if enter_id_turns_3 > 1
-              puts "Try again #{enter_id_turns_3 - 1} attempts remaining"
+            print "invalid badge ## :( : '#{id}' not in db. \n"
+            if enter_badge_turns_3 > 1
+              puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect id numbers"
+              puts "Too many incorrect badge ## entries"
             end
           end
 
           if id_state == true
             break
           end
-          enter_id_turns_3 -= 1
-          if enter_id_turns_3 < 1
+          enter_badge_turns_3 -= 1
+          if enter_badge_turns_3 < 1
             puts "Contact Support."
-            raise "#{enter_id_turns_3} attempts remaining"
+            raise "#{enter_badge_turns_3} attempts remaining"
           end
 
         end
@@ -389,7 +390,7 @@ class The_Password_Manager
             if enter_name_turns_3 > 1
               puts "Try again #{enter_name_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect name spelling"
+              puts "Too many incorrect name entries"
             end
       end
     
@@ -458,7 +459,7 @@ def start
   while (start_ == true)
 
     manager = The_Password_Manager.new
-    the_pw_vault = Password_vault.new
+    
 
     manager.add_admin
 
@@ -529,19 +530,20 @@ def start
 
           when "4"
             
-            the_pw_vault.display_pw_in_vault
+            manager.display_pw_in_vault
+            
             puts "\nVault options:
                   1. Add to Vault        [ press 1 ]
                   2. Remove from Vault   [ press 2 ]
                   3. Vault balance       [ press 3 ]
-                  4. Display Vault       [ press 4 ] \n"
+                  4. Vault holdings      [ press 4 ] \n"
 
             vault_option_state = false
             vault_option = 0
             while (vault_option_state == false)
               vault_option = gets.chomp
               if(vault_option!="1"&&vault_option!="2"&&vault_option!="3"&&vault_option!="4")
-                puts "Invalid input"
+                puts "\nInvalid input"
                      
               else
                 vault_option_state = true
@@ -552,9 +554,9 @@ def start
                     
             when "1"
 
-              the_pw_vault.add_to_vault
-              the_pw_vault.encrpt_pw_in_vault
-              puts "press 'm' for Main Menu"
+              manager.add_to_vault
+              manager.encrpt_pw_in_vault
+              puts "\npress 'm' for Main Menu\n"
               mainmenu = gets.chomp
               if (mainmenu == "m") || (mainmenu == "M")
                 menu_state = true
@@ -564,9 +566,9 @@ def start
                   
             when "2"
 
-              the_pw_vault.delete_pw_in_vault
+              manager.delete_pw_in_vault
               
-              puts "\npress 'm' for Main Menu"
+              puts "\npress 'm' for Main Menu\n"
               mainmenu = gets.chomp
               if (mainmenu == "m") || (mainmenu == "M")
                 menu_state = true
@@ -576,9 +578,9 @@ def start
 
             when "3"
 
-              the_pw_vault.vault_balance
+              manager.vault_balance
               
-              puts "\npress 'm' for Main Menu"
+              puts "\npress 'm' for Main Menu\n"
               mainmenu = gets.chomp
               if (mainmenu == "m") || (mainmenu == "M")
                 menu_state = true
@@ -588,9 +590,9 @@ def start
 
             when "4"
 
-              the_pw_vault.display_pw_in_vault
+              manager.display_pw_in_vault
               
-              puts "\npress 'm' for Main Menu"
+              puts "\npress 'm' for Main Menu\n"
               mainmenu = gets.chomp
               if (mainmenu == "m") || (mainmenu == "M")
                 menu_state = true

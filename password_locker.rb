@@ -1,8 +1,9 @@
 
+require_relative "manager"
 
-class Password_vault
+class Password_vault 
 
-  #attr_reader :needs_encryption 
+  
 
   def initialize()
 
@@ -12,7 +13,7 @@ class Password_vault
 
     @decrpt_pw_vault = {}
     
-   # @needs_encryption = needs_encryption
+   
 
   end
 
@@ -21,31 +22,48 @@ class Password_vault
   def add_to_vault
 
     puts "Keep in mind you will not be able to edit any password stored in a vault :( \n"
-    print "\nTo add password into Vault, find the mystery word, in the mystery answer, to the question: 'why do people 'drink' water?' \n"
-    mystery_word = "eat"
-    while (gets.chomp != mystery_word)
-      print "try again. to add password, find the mystery word, in the mystery answer, to the question: 'why do people drink water?' \n"
-    end
-    print "'eat' is the answer \n"
-    
-      a = 1
+  
+    enter_badge_turns_1 = 1
+    puts "\nThere is only #{enter_badge_turns_1} attempt to add to Vault\n"
+    enter_badge_turns_1 -= 1
 
+    id_state = false
+    while (id_state == false)
+    puts "enter badge ##: "
+    id = gets.chomp
+
+      if @id_vault.has_value?(id)
+
+        id_state = true
+
+      else 
+        print "\ninvalid badge ## :( : '#{id}' not in db. \n"
+        
+        puts "#{enter_badge_turns_1} attempts remaining"
+        
+        puts "Too many incorrect badge ## entries\n"
+        puts "Critical....\n"
+        raise "Contact Support"
+      end
+    end
+
+      a = 1
       while (true)
 
-        print "Your 1st password will be in 'Vault 1', 2nd will be in 'Vault 2' and so on.\nRemember your 'Vault numbers'!\n"
-        print "Enter password into the encyption Vault: \n"
+        print "\nYour 1st password will be in 'Vault 1', 2nd will be in 'Vault 2' and so on.\nRemember your 'Vault numbers'!\n"
+        print "\nEnter password into the encyption Vault: \n"
         
         needs_encryption = gets.chomp
         #new_pw = Password_vault.new
         @pw_vault.store(a, needs_encryption) 
 
-        print "type 'stop' to exit or press 'press any button' to add more \n"
+        print "\nType 'stop' to exit or press any button to add more \n"
 
         if gets.chomp == "stop"
-          print "Your Password security is maximized. \n \n"
+          print "\nYour Password security is maximized. \n \n"
           break
         else
-          print "ok: create another password for the encryption vault  \n \n"
+          print "\nok: create another password for the encryption vault  \n \n"
         end
 
         a+=1
@@ -106,7 +124,7 @@ class Password_vault
 
 
     puts "\nPassword editing disabled :( \n\n"
-    print "To gain inside Vault access, find the mystery word, in the mystery answer, to the question: why do people 'drink' water? \n"
+    print "To gain inside Vault access, enter the mystery word, in the mystery answer, to the question: why do people 'drink' water? \n"
     mystery_word = "eat"
     while (gets.chomp != mystery_word)
       print "Try again. To gain inside Vault access, find the mystery word, in the mystery answer, to the question: why do people 'drink' water? \n"
@@ -114,12 +132,35 @@ class Password_vault
 
     print "'eat' is the answer \n"
 
-    print "\nViewing inside Vault: \n \n"
-    @encrpt_pw_vault.each_key {|key| puts "Vault #{key}: #{@encrpt_pw_vault[key]}\n "}
+        enter_badge_turns_1 = 1
+        puts "\nThere is only #{enter_badge_turns_1} attempt to view Vault holdings\n"
+        enter_badge_turns_1 -= 1
 
-    #Decrpt
+        id_state = false
+        while (id_state == false)
+        puts "enter badge ##: "
+        id = gets.chomp
 
-    #@decrpt_pw_vault.each_key {|key| puts "#{key}: #{@decrpt_pw_vault[key]} "}
+          if @id_vault.has_value?(id)
+
+            id_state = true
+
+          else 
+            print "\ninvalid badge ## :( : '#{id}' not in db. \n"
+            
+            puts "#{enter_badge_turns_1} attempts remaining"
+            
+            puts "Too many incorrect badge ## entries\n"
+            puts "Critical....\n"
+            raise "Contact Support"
+          end
+          
+        end
+
+    print "\nInside Access: \n"
+    @encrpt_pw_vault.each_key {|key| puts "\nVault #{key}: #{@encrpt_pw_vault[key]}\n "}
+
+    
    
   end
 
@@ -128,9 +169,34 @@ class Password_vault
     v_n = 0
     while (true)
 
+      enter_badge_turns_1 = 1
+        puts "\nThere is only #{enter_badge_turns_1} attempt to remove from Vault\n"
+        enter_badge_turns_1 -= 1
+
+        id_state = false
+        while (id_state == false)
+        puts "enter badge ##: "
+        id = gets.chomp
+
+          if @id_vault.has_value?(id)
+
+            id_state = true
+
+          else 
+            print "\ninvalid badge ## :( : '#{id}' not in db. \n"
+            
+            puts "#{enter_badge_turns_1} attempts remaining"
+            
+            puts "Too many incorrect badge ## entries\n"
+            puts "Critical....\n"
+            raise "Contact Support"
+          end
+          
+        end
+
       v_n_state = false
       while (v_n_state == false)
-        print "delete a password using its 'vault number': "
+        print "\nTag a password for removal with its 'Vault number': "
         v_n = gets.chomp
        
         v_n = v_n.to_s
@@ -156,22 +222,22 @@ class Password_vault
       if @pw_vault.has_key?(v_n)||@encrpt_pw_vault.has_key?(v_n)||@decrpt_pw_vault.has_key?(v_n)
 
         v_n_state = true
-        puts "\ndeleting vault: #{v_n}"
+        puts "\nRemoved from Vault: #{v_n}"
         @pw_vault.delete(v_n)
         @encrpt_pw_vault.delete(v_n)
         @decrpt_pw_vault.delete(v_n)
         
       else
-        puts "key: #{v_n}, not in vault"
+        puts "Vault number: #{v_n}, not in database"
       end
 
-      print "delete passwords? 'press any button' for yes,\n'n' for no: \n \n"
+      print "\nRemove passwords? 'press any button' for yes, or 'n' for no: \n \n"
 
       if gets.chomp == "n"
         print "Your Password security is maximized. \n \n"
         break
       else
-        print "ok: delete more \n \n"
+        print "ok: Remove requested \n \n"
       end
       
     end
@@ -188,10 +254,3 @@ class Password_vault
 
 
 end
-
-
-
-
-
-
-
