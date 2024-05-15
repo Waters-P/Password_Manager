@@ -60,7 +60,7 @@ class Password_vault
         print "\nType 'stop' to exit or press any button to add more \n"
 
         if gets.chomp == "stop"
-          print "\nYour Password security is maximized. \n \n"
+          print "\nMaximizing security. \n \n"
           break
         else
           print "\nok: create another password for the encryption vault  \n \n"
@@ -115,7 +115,7 @@ class Password_vault
 
     puts "\nEncrypting done (100%)    ^_^ \n\n"
     puts "In a future update, Password Decryption will be enabled."
-    puts "For now safeguard your encryption in the Vault.\n"
+    puts "For now safeguard your encryptions in the Vault.\n"
 
   end
 
@@ -196,7 +196,7 @@ class Password_vault
 
       v_n_state = false
       while (v_n_state == false)
-        print "\nTag a password for removal with its 'Vault number': "
+        print "\nUse 'Vault number' to tag a password for removal: "
         v_n = gets.chomp
        
         v_n = v_n.to_s
@@ -234,7 +234,7 @@ class Password_vault
       print "\nRemove passwords? 'press any button' for yes, or 'n' for no: \n \n"
 
       if gets.chomp == "n"
-        print "Your Password security is maximized. \n \n"
+        print " Changes saved . \n \n"
         break
       else
         print "ok: Remove requested \n \n"

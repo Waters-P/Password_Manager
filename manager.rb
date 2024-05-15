@@ -128,9 +128,9 @@ class The_Password_Manager < Password_vault
               else 
                 print "Fictional password -x? : '#{pw}' not in database. \n"
                 if enter_pw_turns_3 > 1
-                  puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
+                  puts "\nTry again #{enter_pw_turns_3 - 1} attempts remaining"
                 else 
-                  puts "Too many incorrect passwords"
+                  puts "\nToo many incorrect passwords"
                 end
               end  
               
@@ -148,9 +148,9 @@ class The_Password_Manager < Password_vault
           else 
             print "Fictional badge ## :( : '#{id}' not in database. \n"
             if enter_badge_turns_3 > 1
-              puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
+              puts "\nTry again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect badge ## numbers"
+              puts "\nToo many incorrect badge ## numbers"
             end
           end
 
@@ -169,9 +169,9 @@ class The_Password_Manager < Password_vault
         print "\n'#{first_name}' not in database. Check Spelling \n \n"
         
             if enter_name_turns_3 > 1
-              puts "Try again #{enter_name_turns_3 - 1} attempts remaining"
+              puts "\nTry again #{enter_name_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect name spellings"
+              puts "\nToo many incorrect name spellings"
             end
       end
     
@@ -231,11 +231,11 @@ class The_Password_Manager < Password_vault
                 name_state = true
                 
               else 
-                print "invalid password -x? : '#{pw}' not in database. \n"
+                print "\ninvalid password -x? : '#{pw}' not in database. \n"
                 if enter_pw_turns_3 > 1
-                  puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
+                  puts "\nTry again #{enter_pw_turns_3 - 1} attempts remaining"
                 else 
-                  puts "Too many incorrect password entries"
+                  puts "\nToo many incorrect password entries"
                 end
               end  
               
@@ -253,9 +253,9 @@ class The_Password_Manager < Password_vault
           else 
             print "invalid badge ## :( : '#{id}' not in database. \n"
             if enter_badge_turns_3 > 1
-              puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
+              puts "\nTry again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect badge ## entries"
+              puts "\nToo many incorrect badge ## entries"
             end
           end
 
@@ -314,11 +314,11 @@ class The_Password_Manager < Password_vault
                 name_state = true
                 
               else 
-                print "invalid password -x? : '#{pw}' not in database. \n"
+                print "\ninvalid password -x? : '#{pw}' not in database. \n"
                 if enter_pw_turns_3 > 1
-                  puts "Try again #{enter_pw_turns_3 - 1} attempts remaining"
+                  puts "\nTry again #{enter_pw_turns_3 - 1} attempts remaining"
                 else 
-                  puts "Too many incorrect password entries"
+                  puts "\nToo many incorrect password entries"
                 end
               end  
               
@@ -334,11 +334,11 @@ class The_Password_Manager < Password_vault
             end
 
           else 
-            print "invalid badge ## :( : '#{id}' not in database. \n"
+            print "\ninvalid badge ## :( : '#{id}' not in database. \n"
             if enter_badge_turns_3 > 1
-              puts "Try again #{enter_badge_turns_3 - 1} attempts remaining"
+              puts "\nTry again #{enter_badge_turns_3 - 1} attempts remaining"
             else 
-              puts "Too many incorrect badge ## entries"
+              puts "\nToo many incorrect badge ## entries"
             end
           end
 
