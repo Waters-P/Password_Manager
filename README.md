@@ -1,7 +1,3 @@
-This is a password manager that creates an executive account 
-  and allows that account user to safeguard any password 
-    they own in an encryption vault.
+This is a password manager. It uses an encryption vault to safeguard any password.
 
-
-
-  Terminal command to start: ruby Start.rb
+Terminal command to start: ruby Start.rb
