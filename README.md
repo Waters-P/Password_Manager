@@ -4,6 +4,6 @@ This is a password manager. It uses an encryption vault to safeguard any passwor
 
 ## Start
 
-Run `ruby start.rb` in the terminal.
+Run `ruby Start.rb` in the terminal.
 
 
